@@ -11,10 +11,6 @@ async function getData() {
 		const json = await getResponse();
 		const arr = Object.entries(json);
 		var items = arr.map((item) => item[1]);
-		var idList = getIdList(items);
-		idList.map((id) => {
-			createHeaderOfTable(id);
-		});
 	} catch(error) {
 		console.log(error);
 	}
@@ -30,14 +26,25 @@ function getIdList(items) {
 	return arr;
 }
 
-function createHeaderOfTable(id) {
-	const newUser = document.createElement("th");
-	newUser.innerText = `${id}`;
-	newUser.className = `${id}`;
-	table.appendChild(newUser);
+async function createHeaderOfTable() {
+	while(table.hasChildNodes()) {
+		table.removeChild(table.firstChild);
+	}
+	const items = await getData();
+	var idList = getIdList(items);
+	idList.map((id) => {
+		const newUser = document.createElement("span");
+		newUser.innerText = `${id}`;
+		newUser.className = `${id}`;
+		table.appendChild(newUser);
+	});
 }
 
 function createPosts(items, id) {
+	while(board.hasChildNodes()) {
+		board.removeChild(board.firstChild);
+	}
+
 	const posts = items.filter((item) => item["userId"] == id);
 	posts.map((post) => {
 		const postObj = document.createElement("div");
@@ -59,13 +66,12 @@ function createPosts(items, id) {
 const handleUserClick = async (event) => {
 	const { target } = event;
 	const items = await getData();
-	console.log(items);
 	createPosts(items, target.className);
 }
 
 
 table.addEventListener("click", handleUserClick);
-getData();
+createHeaderOfTable();
 
 
 
