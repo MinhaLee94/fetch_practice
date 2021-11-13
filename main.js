@@ -34,8 +34,8 @@ async function createHeaderOfTable() {
 	var idList = getIdList(items);
 	idList.map((id) => {
 		const newUser = document.createElement("span");
-		newUser.innerText = `${id}`;
-		newUser.className = `${id}`;
+		newUser.innerText = `User${id}`;
+		newUser.className = `userName`;
 		table.appendChild(newUser);
 	});
 }
@@ -48,10 +48,11 @@ function createPosts(items, id) {
 	const posts = items.filter((item) => item["userId"] == id);
 	posts.map((post) => {
 		const postObj = document.createElement("div");
-		const userId = document.createElement("span");
-		const title = document.createElement("span");
-		const body = document.createElement("span");
+		const userId = document.createElement("div");
+		const title = document.createElement("div");
+		const body = document.createElement("div");
 
+		postObj.className = "post";
 		userId.innerText = `User ID: ${id}`;
 		title.innerText = `Title: ${post["title"]}`;
 		body.innerText = `Body: ${post["body"]}`;
@@ -66,7 +67,7 @@ function createPosts(items, id) {
 const handleUserClick = async (event) => {
 	const { target } = event;
 	const items = await getData();
-	createPosts(items, target.className);
+	createPosts(items, target.innerText.substring(4));
 }
 
 

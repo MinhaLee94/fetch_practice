@@ -1,0 +1,28 @@
+body {
+  margin: 0 20px;
+}
+
+#userTable {
+  display: flex;
+  width: 800px;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.userName {
+  font-size: 16px;
+  padding: 5px;
+  border: 1px solid #064420;
+  border-radius: 3px;
+  background-color: #678983;
+  color: white;
+}
+
+.post {
+  width: 800px;
+  margin-bottom: 20px;
+  padding: 5px;
+  background-color: #f0e9d2;
+  border-radius: 5px;
+}
