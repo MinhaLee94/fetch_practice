@@ -27,9 +27,7 @@ function getIdList(items) {
 }
 
 async function createHeaderOfTable() {
-	while(table.hasChildNodes()) {
-		table.removeChild(table.firstChild);
-	}
+	table.innerHTML = "";
 	const items = await getData();
 	var idList = getIdList(items);
 	idList.map((id) => {
@@ -41,10 +39,7 @@ async function createHeaderOfTable() {
 }
 
 function createPosts(items, id) {
-	while(board.hasChildNodes()) {
-		board.removeChild(board.firstChild);
-	}
-
+	board.innerHTML = "";
 	const posts = items.filter((item) => item["userId"] == id);
 	posts.map((post) => {
 		const postObj = document.createElement("div");
